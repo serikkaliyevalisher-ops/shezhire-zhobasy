@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Қазақ ру-тайпалары шежіресі</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday learning: a classroom reference that feels like a printed museum wall-chart
+   IDEA a Kazakh шежіре scroll crossed with a felt текемет: four tiers of time, roots above, жүздер below
+   PICTURE the living tree itself: tap a tribe and its line of ancestors lights up through the ages
+   COLOUR sky blue (көк Тәңір) field, white/deep-teal ground, sun gold accent, felt red for the lit path
+   TYPE Unbounded for titles + Inter for text (both carry Kazakh Cyrillic)
+   LAYOUT laptop: tree left, sticky detail card right; phone: title, tree, detail card, then genetics */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#08171d);--ink:light-dark(#0e2a33,#e6f3f6);--mut:light-dark(#4d6a73,#9db9c1);--sky:#0d9cc4;--skyd:light-dark(#0a7898,#4cc3e3);--gold:#f2b51c;--red:light-dark(#cf3b26,#ff7a5c);--line:light-dark(#d5e6eb,#1d3640);--tint:light-dark(#f1f8fa,#0d2129);--card:light-dark(#ffffff,#0f252e)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:20px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Unbounded,Inter,sans-serif;line-height:1.08;letter-spacing:-.02em;text-wrap:balance;margin:0}
+.band{padding:clamp(28px,4vw,56px) max(4vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+header{background:var(--sky);color:#fff;padding-bottom:0}
+header h1{font-size:clamp(28px,4.6vw,48px);font-weight:700;max-width:18ch}
+header p{max-width:62ch;margin:14px 0 0;font-size:17px;color:#eafaff}
+.orn{display:block;width:100%;height:26px;margin-top:28px;color:var(--gold)}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:28px;align-items:start}
+.tree{position:relative}
+.tree svg.edges{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.tier{position:relative;display:grid;grid-template-columns:130px minmax(0,1fr);gap:14px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.tier>.era{font-size:13px;color:var(--mut);padding-top:6px}
+.tier>.era b{display:block;color:var(--ink);font-size:15px}
+.nodes{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.n{font:600 14px/1.2 Inter,sans-serif;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 14px;min-height:40px;cursor:pointer;text-align:left;transition:background .2s,border-color .2s,opacity .2s}
+.n small{display:block;font-weight:400;font-size:12px;color:var(--mut)}
+.n:hover{border-color:var(--skyd)}
+.n:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.n.on{border-color:var(--red);background:color-mix(in srgb,var(--red) 12%,var(--card))}
+.n.sel{background:var(--red);border-color:var(--red);color:#fff}.n.sel small{color:#ffe9e3}
+.dim .n:not(.on):not(.sel){color:var(--mut);border-color:color-mix(in srgb,var(--line) 70%,transparent)}
+.zhuz{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding-top:16px;position:relative;z-index:1}
+.zh{background:var(--tint);border-radius:14px;padding:12px}
+.zh.out{background:color-mix(in srgb,var(--gold) 16%,var(--bg))}
+.zh h3{font-size:15px;margin:0 0 10px;color:var(--skyd)}
+.zh .nodes .n{border-radius:10px;flex:1 1 120px}
+.extra{font-size:13px;color:var(--mut);margin-top:10px}
+path.e{fill:none;stroke:var(--line);stroke-width:1.4}
+path.e.on{stroke:var(--red);stroke-width:2.6}
+aside.card{position:sticky;top:16px;background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:20px;max-height:calc(100vh - 32px);overflow:auto}
+.card h2{font-size:26px}
+.card .meta{color:var(--mut);font-size:14px;margin:6px 0 12px}
+.card h4{font:700 13px Inter,sans-serif;color:var(--skyd);margin:16px 0 6px}
+.card p{margin:0 0 8px;font-size:15px}
+.chain{list-style:none;margin:0;padding:0 0 0 14px;border-left:3px solid var(--red)}
+.chain li{position:relative;padding:3px 0 7px 6px;font-size:14px}
+.chain li::before{content:"";position:absolute;left:-23px;top:9px;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--red)}
+.chain li span{color:var(--mut);font-size:12px;white-space:nowrap}
+.gene{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;font-size:14px}
+.bar{height:10px;border-radius:5px;background:var(--line);grid-column:1/-1;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:5px}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;margin:4px 6px 0 0;background:var(--tint)}
+.toast{display:none}
+.sec h2{font-size:clamp(24px,3vw,34px);margin-bottom:10px}
+.sec>.wrap>p{max-width:70ch;color:var(--mut)}
+.dna{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}
+.dna th{text-align:left;font-weight:600;color:var(--mut);padding:8px 6px;border-bottom:1.5px solid var(--line)}
+.dna td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+.dna td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.dna .bar{height:12px}
+.debates{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}
+.deb{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px}
+.deb h3{font-size:16px;margin-bottom:10px}
+.deb p{margin:0 0 8px;font-size:15px}
+.deb b{color:var(--skyd)}
+.alt{background:var(--tint)}
+.cav{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:14px;margin-top:16px}
+.cav div{border-left:4px solid var(--gold);background:var(--tint);border-radius:0 14px 14px 0;padding:14px 16px}
+.cav h3{font-size:15px;margin-bottom:8px}
+.cav p{margin:0;font-size:15px}
+.tasks{counter-reset:t;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+.tasks div{background:var(--sky);color:#fff;border-radius:16px;padding:16px}
+.tasks h3{font-size:15px;margin-bottom:8px}
+.tasks p{margin:0;font-size:15px}
+footer{font-size:14px;color:var(--mut)}
+footer ol{padding-left:20px}footer a{color:var(--skyd)}
+.note{font-size:13px;color:var(--mut);margin-top:10px}
+@media(max-width:1180px){.zhuz{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1000px){.main{grid-template-columns:minmax(0,1fr)}aside.card{position:static;max-height:none}
+.toast.show{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:9;gap:10px;align-items:center;background:var(--red);color:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 6px 20px #0004;font-size:14px}
+.toast span{flex:1}.toast button{font:600 14px Inter,sans-serif;background:#fff;color:#a52b1a;border:0;border-radius:10px;padding:10px 12px;min-height:44px;cursor:pointer}}
+@media(max-width:700px){.tier{grid-template-columns:minmax(0,1fr);gap:6px}.zhuz{grid-template-columns:minmax(0,1fr)}.n{font-size:13px;padding:8px 11px}
+.dna thead{display:none}.dna tr{display:grid;grid-template-columns:minmax(0,1fr) auto;padding:8px 0;border-bottom:1px solid var(--line)}.dna td{border:0;padding:2px 0}.dna td:nth-child(3){grid-column:1/-1}.dna td:nth-child(5){grid-column:1/-1;color:var(--mut)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="band">
+ <div class="wrap">
+  <h1>Қазақ ру-тайпаларының этникалық шежіресі</h1>
+  <p>Сақ, үйсін, ғұн мен қаңлыдан бастап түркі, оғыз, қыпшақ дәуірлері арқылы Алашқа және үш жүзге дейінгі жол. Тайпаны немесе ежелгі бірлестікті басыңыз: оның шығу тегі қызыл сызықпен жанады. Деректерді қалай оқу керегі <a href="#eskertu" style="color:#fff">ескертулерде</a>.</p>
+ </div>
+ <svg class="orn" preserveAspectRatio="none" viewBox="0 0 1200 26" aria-hidden="true"><defs><path id="m" d="M0 26V14c0-6 5-10 10-10s9 4 9 8-3 6-6 6-4-2-4-4 1-3 3-3M40 26V14c0-6-5-10-10-10s-9 4-9 8 3 6 6 6 4-2 4-4-1-3-3-3" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></defs><g id="row"></g></svg>
+</header>
+
+<main class="band"><div class="wrap main">
+ <div class="tree" id="tree">
+  <svg class="edges" id="edges" aria-hidden="true"></svg>
+  <div class="tier"><div class="era"><b>Ежелгі дәуір</b>б.з.б. І мыңжылдық – б.з. V ғ.</div><div class="nodes" id="tA"></div></div>
+  <div class="tier"><div class="era"><b>Түркі дәуірі</b>V–XII ғасырлар</div><div class="nodes" id="tB"></div></div>
+  <div class="tier"><div class="era"><b>Моңғол дәуірі</b>XIII–XV ғасырлар</div><div class="nodes" id="tC"></div></div>
+  <div class="zhuz" id="tD"></div>
+  <p class="extra">Шақшам тайпасы Үйсін құрамында, Ойсыл ұрпағы ретінде аталады. Тарақты Орта жүзде, Арғынмен бірге саналады.</p>
+ </div>
+ <aside class="card" id="card" aria-live="polite"></aside>
+</div></main>
+
+<section class="band sec" id="eskertu"><div class="wrap">
+ <h2>Ескертулер: деректерді қалай оқу керек</h2>
+ <div class="cav">
+  <div><h3>Бір автордың көзқарасы</h3><p>Шығу тегі тізбектері негізінен Т. Омарбековтың екі оқу құралына сүйенеді. Олардың бір бөлігі ғылымда даулы: Алшын ← Ашина, Адай ← дайлар, Керей ← Сарыүйсін. Бұларды дәлелденген факт емес, ғылыми болжам ретінде оқыңыз.</p></div>
+  <div><h3>Шежіре мен генетика қайшы келуі мүмкін</h3><p>Үйсін руларының атауы ежелгі болғанымен, ортақ атасы шамамен 700–800 жыл бұрын өмір сүрген. Керейдің Сарыүйсіннен тарағаны, қожалардың араб ұрпағы екені генетикамен расталмады. Ал Әлімұлы мен Байұлының ортақ атасы расталды.</p></div>
+  <div><h3>Y-ДНҚ тек әке жағын көрсетеді</h3><p>Ол ана жағын, тілді, мәдениетті көрсетпейді. Гаплотоп этносқа тең емес. Генетикалық жас есептеулерінің қателігі ±200 жылдай.</p></div>
+  <div><h3>Кейбір іріктемелер шағын</h3><p>Уақ – 45 адам, Төре – 28 адам: қорытындылар алдын ала. Төлеңгіттер бойынша жүйелі генетикалық зерттеу таппадым.</p></div>
+  <div><h3>Пайыздарды бастапқы мақаламен тексеріңіз</h3><p>Арғын, Найман, Керей, Уақ, Қыпшақ, Қоңырат, Кіші жүз және Төре пайыздары Wikipedia-дағы жиынтық кестеден. Ол кестенің бағандары ығысып тұр; ретін Арғын (G1, 67%) мен Қоңырат (86–88%) бойынша бастапқы зерттеулермен салыстырып анықтадым. Сабақта қолданар алдында түпнұсқамен салыстырыңыз.</p></div>
+  <div><h3>Ұрандар мен рулар дереккөзге қарай өзгереді</h3><p>Тынышпаев, Гродеков, Мейер, Арғынбаев–Мұқанов–Востров кестелерінде бір тайпаның бірнеше ұраны кездеседі; мұнда бір-екеуі ғана берілген.</p></div>
+ </div>
+</div></section>
+
+<section class="band sec alt"><div class="wrap">
+ <h2>Шежіре мен Y-ДНҚ: көп тайпаны бір ата біріктіреді, бірақ әрдайым ежелгі емес</h2>
+ <p>Әр тайпадағы ең жиі кездесетін әке тегі желісі (Y-хромосома гаплотобы). Жоғары пайыз ортақ атаны көрсетеді. Ол атаның қашан өмір сүргенін генетиктер есептейді. Көп жағдайда бұл XIII–XV ғасырлар, яғни этноним ежелгі болғанымен, қазіргі ру бір ортағасырлық атадан тараған.</p>
+ <div class="scroll"><table class="dna" id="dna"><thead><tr><th>Тайпа</th><th>Жүз</th><th>Басым гаплотоп</th><th class="num">Үлесі</th><th>Не көрсетеді</th></tr></thead><tbody></tbody></table></div>
+ <p class="note">Y-ДНҚ тек әке жағын көрсетеді; гаплотоп этносқа тең емес. Кейбір іріктемелер шағын (n саны көрсетілген). Деректер: Жабағин және т.б. 2017–2025 зерттеулері.</p>
+</div></section>
+
+<section class="band sec"><div class="wrap">
+ <h2>Ғалымдар дауласатын бес сұрақ</h2>
+ <p>Омарбеков еңбектері жазба деректер, шежіре мен таңбаларға сүйенеді; генетика басқа қырынан тексереді. Сабақта осы қайшылықтарды талқылауға болады.</p>
+ <div class="debates" id="deb"></div>
+</div></section>
+
+<section class="band sec alt"><div class="wrap">
+ <h2>Сабаққа арналған тапсырмалар</h2>
+ <div class="tasks">
+  <div><h3>Тізбекті қалпына келтір</h3><p>Өз руыңның немесе таңдаған тайпаның жолын ағаштан тауып, әр буынға бір дерек жаз: кім, қашан, қай дерекнамада аталады.</p></div>
+  <div><h3>Шежіре мен ДНҚ-ны салыстыр</h3><p>Үйсін мен Керей мысалында шежіре, таңба және генетика айтатынды кестеге түсір. Қайсысы ежелгі атауды, қайсысы нақты атаны көрсетеді?</p></div>
+  <div><h3>Дөңгелек үстел</h3><p>«Этнос аты мен ру атасы бір нәрсе ме?» Екі топ: Омарбековтің дәлелдері мен генетиктердің дәлелдері.</p></div>
+ </div>
+</div></section>
+
+<footer class="band"><div class="wrap">
+ <b>Дереккөздер</b>
+ <ol>
+  <li>Омарбеков Т. Қазақ түркілерінің этникалық тарихы (б.з.б. І мыңжылдық – б.з. ІХ ғ.). Алматы: Қазақ университеті, 2013.</li>
+  <li>Омарбеков Т. Қазақ түркілерінің шығу тегі (IX–XV ғғ.). Алматы: Қазақ университеті, 2014. Ұрандар осы кітаптағы Тынышпаев, Гродеков, Арғынбаев–Мұқанов–Востров кестелерінен.</li>
+  <li>Zhabagin M. et al. The medieval Mongolian roots of Y-chromosomal lineages from South Kazakhstan. BMC Genetics, 2020. <a href="https://link.springer.com/10.1186/s12863-020-00897-5">Мақала</a></li>
+  <li>Zhabagin M. et al. Medieval Super-Grandfather founder of Western Kazakh clans from haplogroup C2a1a2-M48. J Hum Genet, 2021. <a href="https://www.nature.com/articles/s10038-021-00901-5">Мақала</a></li>
+  <li>Zhabagin M. et al. The connection of the genetic, cultural and geographic landscapes of Transoxiana. Sci Rep, 2017. <a href="https://www.nature.com/articles/s41598-017-03176-z">Мақала</a> (Қоңырат, Қожа)</li>
+  <li>Y-chromosomal insights into the paternal genealogy of the Kerey tribe, 2024. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11373838/">Мақала</a></li>
+  <li>Zhunussova A. et al. Genetic genealogy of Y-chromosome in the Zhetiru tribe. Front. Genet., 2025. <a href="https://www.frontiersin.org/articles/10.3389/fgene.2025.1516130/full">Мақала</a></li>
+  <li>Farkhatuly A. et al. Genetic relationship among the Kazakh people based on Y-STR markers. Front. Genet., 2022. <a href="https://www.frontiersin.org/articles/10.3389/fgene.2021.801295">Мақала</a></li>
+  <li>Тайпалар бойынша жиынтық кесте: <a href="https://en.wikipedia.org/wiki/Y-DNA_haplogroups_in_Kazakh_tribes">Y-DNA haplogroups in Kazakh tribes</a> (Жабағин т.б. мақалаларынан).</li>
+ </ol>
+</div></footer>
+
+<div class="toast" id="toast"><span id="tt"></span><button id="tb" type="button">Толығырақ</button></div>
+
+<script>
+{
+const R=document.getElementById('row');R.innerHTML=Array.from({length:30},(_,i)=>`<use href="#m" x="${i*40}"/>`).join('');
+const N={
+ sak:['A','Сақтар','б.з.б. VII–III ғ.','Исседон сақтары Жетісуда үйсіндерге ұласты. Омарбеков сақ пен үйсіннің рухани және тарихи сабақтастығын атап өтеді.'],
+ usun:['A','Үйсіндер','б.з.б. II ғ. – б.з. V ғ.','Жетісудағы алғашқы мемлекеттік бірлестік. Шежіредегі Елсау би – үйсін күнбиі Лецзяомиге (б.з.б. ~177–104) теңеледі. Ұлы жүздің көп тайпасы осыдан таралады деп саналады.'],
+ hun:['A','Ғұндар (хұнну)','б.з.б. III ғ. – б.з. V ғ.','Омарбековтің пікірінше, түркілердің ежелгі бабалары. Батысқа кеткен ғұндардың қалдығы Жетісуда Юебань елін құрды.'],
+ kangju:['A','Қаңлы (кангюй)','б.з.б. III ғ. – б.з. V ғ.','Сырдарияның орта ағысы мен Қаратау өңіріндегі мемлекет. Атауы Алтайдағы Кан өзенімен байланыстырылады; кейін қыпшақтар осы бірлестіктен бөлінген деген пікір бар.'],
+ dinlin:['A','Динлиндер','б.з.б. І мыңжылдық','Алтай мен Саянның ежелгі тайпалары. Омарбеков бойынша теле, гаогюй, кейін оғыз бен қыпшақтардың арғы негізі.'],
+ dahae:['A','Дайлар (дахтар)','б.з.б. І мыңжылдық','Арал мен Каспий маңындағы сақ тайпалары. Кейбір ғалымдар Адай этнонимін осыдан шығарады; Омарбеков бұл пікірді талдап, телелердегі Адйе руын да қарастырады.'],
+ yuban:['B','Юебань (Йұрпан)','V ғ.','Ғұн қалдықтары мен үйсін рулары қосылып құрған ел. Дулу, Албан (Шубан), Суан (Зыбан) бабалары осы ел құрамында болған.'],
+ dulu:['B','Дулу бірлестігі, Он оқ','VI–VIII ғғ.','Батыс түрік қағанатының шығыс қанаты, бес тайпа. Омарбеков: дулаттар – Он оқ құрамындағы дулулардың тікелей мұрагерлері.'],
+ turgesh:['B','Түргеш қағанаты','699–766','Сары түргеш пен қара түргешке бөлінген. Сарыүйсін – сары түргештердің, Әлімұлының «қара» рулары – қара түргештердің жалғасы деген пікір.'],
+ karluk:['B','Қарлұқ, шігіл, Қарахан','VIII–XII ғғ.','Жетісуда түргештен кейінгі билік. Шапыраштыны Қазбек бек шігіл (үйсін) ортасымен байланыстырады; Арғын атауының «арғу» түрі де осы кезеңге жатады.'],
+ ashina:['B','Ашина әулеті','VI–VIII ғғ.','Түрік қағандарының билеуші руы. Омарбеков «Алшын» атауын Ашина → Ашын → Алшын түрінде өрбітеді.'],
+ shato:['B','Шато түркілері, онқұт','VII–XIII ғғ.','Батыс түріктің чуюе тайпасынан шыққан шатолар Қытай шекарасына көшіп, онқұттармен қосылды. Уақтың арғы бабалары деп саналады.'],
+ toguz:['B','Тоғыз оғыз, керейттер','VIII–XII ғғ.','Тоғыз оғыздан құйғыр, қарлұқ, керейт бірлестіктері бөлінді. XII ғ. Керейт хандығы.'],
+ segiz:['B','Сегіз оғыз, наймандар','VIII–XII ғғ.','Омарбеков бойынша Найман бірлестігі Сегіз оғыздан (Сегіз Байырқу) бой көтерді; наймандар түркі тілді болған.'],
+ teles:['B','Теле, оғыз (Байырқу)','IV–X ғғ.','Динлиндердің мұрагері, кейін «оғыз» атанған көп тайпалы одақ. Байұлы («Бай»), Телеу, Сіргелі бабалары осы ортамен байланыстырылады.'],
+ qiyan:['B','Қиян, Ергенеқон тайпалары','VI–XII ғғ.','Әбілғазы мен шежіре бойынша Қоңыраттың атасы Қиян, Жалайырдың атасы Нүкүз Ергенеқоннан шыққан. Омарбеков Қиянды Қияттан ажыратады.'],
+ islam:['B','Мұсылман миссионерлері','X–XIV ғғ.','Мәуереннахрдан далаға ислам таратқан шейхтар мен Қожа Ахмет Яссауи ізбасарлары. Қожалар өз тегін осылармен байланыстырады.'],
+ kipchak:['B','Сір, қимақ, қыпшақ','VII–XIII ғғ.','Алтайдағы Сір тайпасынан бастау алып, Қимақ қағанатында, кейін Дешті Қыпшақта күшейді. Жетіру үлгісі қимақтардың жеті тайпасына ұқсайды.'],
+ mongol:['C','Моңғол дәуірі','XIII–XIV ғғ.','Шыңғыс хан империясы, Жошы ұлысы, Ақ Орда. Жалайыр, Қоңырат, Найман, Керей, Уақ осы кезде батысқа қоныс аударып, рулық құрылымы қайта құрылды.'],
+ alash:['C','Алты сан Алаш','XIV–XV ғғ.','Омарбеков: «үш сан Алаш» → «алты сан Алаш». Алты ұлыс: Жалайыр, Қоңырат, Алшын, Арғын, Найман, Қыпшақ.'],
+ khan:['C','Қазақ хандығы','1465','Керей мен Жәнібек Шу–Талас аралығына, дулаттар мекеніне көшіп келді. Тайпалар үш жүзге біріге бастады.']
+};
+const T=[
+ ['saryuisin','Сарыүйсін','Ұлы','Байтоқ','Құлымбет, Жанай, Жолай-Танай, Жандосай',[['sak','usun','dulu','turgesh']],'Шежіре: Бәйдібектің Сарыбәйбішеден туған ұлы. Омарбеков: «Түргеш Алаш чордың ұрпақтары», яғни ежелгі үйсін руларының мұрагері болған сары түргештер.','Генетиктер тайпаның басым желісін XIII–XIV ғ. моңғол дәуірімен байланыстырады.',['C2*-ST',87.5,'']],
+ ['shapyrashty','Шапырашты','Ұлы','Қарасай','Екей, Есқожа, Айқым, Шыбыл, Асыл',[['usun','dulu','turgesh','karluk']],'Матай қарттың шежіресі бойынша шын аты Досымбет, VIII ғ. өмір сүрген. Омарбеков: рудың өзі ХІ–ХІІ ғ. қалыптасқан, бабалары шігілдермен бірге көшкен.','Басым желі: C2*-ST.',['C2*-ST',46.7,'']],
+ ['ysty','Ысты','Ұлы','Жауатар','Ойық, Тілік',[['usun','dulu'],['teles']],'Омарбеков: Дулу бірлестігіндегі «шыты» (Ше-шы-ти) тайпасы; ертеректе оғыздармен байланысты болған.','Тайпаның басым желісі басқа үйсін руларынан ерекше: J1.',['J1-M267',74,'']],
+ ['oshakty','Ошақты','Ұлы','Бақтияр','Аталық, Байлы, Қоңыр, Тасжүрек',[['usun','dulu']],'«Ошақ па, Үш оқ па?» Омарбеков Ошақ бабаны VIII ғ. орналастырады, ал төрт атасы XVI ғ. өмір сүрген. Қырғыздағы Очок руымен түбі бір.','Профилі аралас: C2 және R1a.',['C2',36.7,'R1a 26,7%']],
+ ['alban','Албан','Ұлы','Райымбек','Сары, Шыбыл, Алжан, Қызылбөрік, Қоңыр',[['hun','yuban','dulu'],['usun','yuban']],'Омарбеков: Юебань еліндегі Шубан (чубань) руынан бастау алады; дулулармен о бастан бірге болған.','Басым желі: C2*-ST (кей тармақтарда C2-M48).',['C2*-ST',65.2,'']],
+ ['suan','Суан','Ұлы','Байсуан','',[['hun','yuban','dulu'],['usun','yuban']],'Омарбеков: Юебань құрамындағы Зыбан тайпасы; бабалары ғұн рулары мен үйсін руларының қосылуынан шыққан. Керейлердегі Сыбан руы да туыстық белгісі.','Басым желі: C2*-ST.',['C2*-ST',61,'']],
+ ['dulat','Дулат','Ұлы','Бақтияр','Ботбай, Сиқым, Жаныс, Шымыр',[['usun','yuban','dulu','turgesh']],'Омарбеков: Он оқ құрамындағы дулулардың мұрагерлері. Қазақ хандығы дулаттар мекені Шу–Талас аралығында құрылды. 1867 ж. 40 мыңдай түтін.','Басым желі: C2*-ST.',['C2*-ST',62.3,'']],
+ ['sirgeli','Сіргелі','Ұлы','Тоғанас','Батыр, Жайдақ, Қарабатыр, Байжігіт',[['usun'],['dinlin','teles']],'Шежіре: Ойсылдың ұлы. Омарбеков: атау кейін, ХV ғ. соңында пайда болған; бабалары Теле одағындағы Сір ортасымен, ал құрамы Байұлы мен алшындармен байланысты.','Үйсіннің басқа руларынан мүлде бөлек желі: N1a.',['N1a-M178',80,'']],
+ ['jalayir','Жалайыр','Ұлы','Бақтияр, Қабылан','Шуманақ, Сырманақ',[['dinlin','teles','qiyan','mongol','alash']],'Омарбеков: атау «Қалайыр» өзенінен; ежелгі оғыз тайпасы, Шыңғысханға жақын болған. Кебек хан тұсында Шу мен Сыр бойындағы «манақ» (сақшы) құқын алып, Шуманақ, Сырманақ атанды. Алаштың «үлкені».','Үйсін руларымен ортақ C2*-ST, бірақ жеке α-кластер (~750 жыл).',['C2*-ST',41.3,'']],
+ ['kanly','Қаңлы','Ұлы','Бәйтерек, Айырылмас','Тоғызбай, Онбай, Бақа, Бадырақ, Қараманас',[['kangju']],'Омарбеков: тамыры б.з.б. ІІІ ғ. кангюй мемлекетіне барады; «Қаңлыдан хан сайла» мақалы осыдан. Селжұқтар мен қыпшақтардың бір бөлігі осы ортадан шыққан.','Басым желі: Q.',['Q-M242',53,'']],
+ ['shanyshkyly','Шанышқылы','Ұлы','Айырылмас','',[['dinlin','yuban','dulu']],'Омарбеков: бабалары телелер құрамынан Юебань мен Дулуға (Шаныш) енген. Қаңлымен бір ата емес, көрші отырған одақтас; XVII ғ. Ер Есім соғыстарынан кейін шашырады.','Басым желі: G2.',['G2-P15',35,'C2* 18%']],
+ ['argyn','Арғын','Орта','Ақжол','Мейрам, Атығай, Қаракесек, Қаржас, Тобықты, Бәсентиін',[['hun','karluk','mongol','alash']],'Омарбеков сызбасы: Ғұн → Алун (гаогюй) → Арағұн → Арғу (басмыл-қарлұқ) → Аркенут (XIII ғ.). Аристов пен Тынышпаев атауды Алтайдағы Аргун/Аргут өзенінен шығарады.','Ерекше желі: G1; басқа тайпалардан генетикалық тұрғыдан оқшау.',['G1-M285',67,'']],
+ ['naiman','Найман','Орта','Қаптағай','Бағаналы, Балталы, Бура, Матай, Садыр, Төртуыл, Қаракерей',[['dinlin','teles','segiz','mongol','alash']],'Омарбеков: Сегіз оғыздан бой көтерген, XII ғ. Найман хандығы; барлық негізгі деректер түркі тілді екенін көрсетеді.','Наймандарға тән O2 кластері табылған (n=336).',['O2-M134',42,'C2-M48 27%']],
+ ['kerey','Керей','Орта','Жаубасар, Ақжол','Абақ (12 ата), Ашамайлы',[['usun','dulu','turgesh','toguz','mongol']],'Омарбеков: таңбасы (Абақ, крест) Сарыүйсінмен ортақ, бабалары Дулу мен Түргеш ішінде болып, VIII ғ. шығысқа көшкен; кейін Тоғыз оғыздағы керейттер.','Желісі C2*-ST: әлемдегі бір атадан тараған ең үлкен рулардың бірі.',['C2*-ST',66,'n=102; басқа зерттеуде 76%']],
+ ['uak','Уақ','Орта','Жаубасар, Бармақ','',[['hun','shato','mongol']],'Омарбеков: Батыс түріктің чуюе тайпасынан шыққан шато түріктері, кейін Ұлы қорған бойындағы онқұттар. Рашид ад-дин оларды моңғол емес «далалық тайпа» деп жазған.','Іріктеме шағын, сондықтан қорытынды алдын ала: N1a басым.',['N1a',64,'n=45']],
+ ['kypshak','Қыпшақ','Орта','Ойбас','Торы, Қарабалық, Күлан, Қара, Ұзын',[['dinlin','teles','kipchak','alash']],'Алтай–Саяннан Ертіс бойына, Қимақ қағанатына, кейін Дешті Қыпшаққа. Омарбеков: Қыпшақ хандығы түрік қағанаттарының саяси жүйесін жалғастырды.','Басым желі: R1b, одан кейін J2.',['R1b',47,'J2 22%']],
+ ['konyrat','Қоңырат','Орта','Алатау','Жансары, Қостаңбалы',[['teles','qiyan','mongol','alash']],'Шежіре: Қиян → Жорлық мерген → Қоңырат → Сеңке би (Шыңғысханды хан көтерген 15 бидің бірі). Омарбеков: олқұноуттар ХІ ғ. бастап Қоңырат атанған; Қиянды моңғол Қиятымен шатастыру – қате.','Бір атадан: C2-M407 өте жоғары.',['C2-M407',86,'']],
+ ['alimuly','Әлімұлы','Кіші','әр рудың өз ұраны','Шекті, Төртқара, Қаракесек, Шөмекей, Кете, Қарасақал',[['hun','ashina','alash'],['turgesh']],'Омарбеков: «Алшын» атауы Ашина → Ашын → Алшын. Қаракесек, Төртқара, Қарасақал «қара» рулары қара түргештермен байланысты.','Байұлымен ортақ ата (Алау әмір, ~500–700 жыл бұрын).',['C2-M48',77,'']],
+ ['baiuly','Байұлы','Кіші','Бекет (Адай), Дәуқара, Баймұрат т.б.','Адай, Алаша, Байбақты, Беріш, Есентемір, Жаппас, Масқар, Таз, Тана, Ысық, Шеркеш, Қызылқұрт',[['hun','ashina','alash'],['teles'],['dahae']],'Омарбеков: «Бай» атауы оғыздардағы Байырқу, Баегумен байланысты. Адай туралы екі нұсқа: ежелгі дайлар (дахтар) немесе теледегі Адйе руы; оғыз заманында қынықтарға жақын жүрген.','Шежіре дәлелденді: Әлімұлымен ортақ M48 атасы.',['C2-M48',69,'']],
+ ['zhetiru','Жетіру','Кіші','Тама – Қарабура, Табын – Тостаған т.б.','Табын, Тама, Кердері, Керейт, Жағалбайлы, Рамадан, Телеу',[['dinlin','teles','kipchak'],['toguz'],['teles']],'Омарбеков: «Жеті» құрылымы қимақ пен қыпшақтардағы жеті тайпа үлгісіне ұқсайды; Тама қыпшақпен таңбалас, Телеу телелерден, Керейт керейттерден. Тәуке хан тұсында бір одаққа бірікті.','Бір кластер құрамайды: жеті дербес рудың саяси одағы.',['C2-M48',27,'C2* 25%']],
+ ['tore','Төре','Тыс','Шыңғыс ұрпағы','Жошы ұрпақтары: Керей мен Жәнібек хандар әулеті',[['mongol']],'Шыңғыс ханның үлкен ұлы Жошыдан тараған хан-сұлтандар; жүзге кірмей, билеуші әулет болған. Омарбеков: тарақ таңбасы төрелердің меншікті таңбасы, оны Шыңғыс ұрпақтары өздеріне адал Жалайыр, Төлеңгіт, Тарақты сияқты тайпаларға берген.','Іріктеме өте шағын (n=28): C2* басым.',['C2*',36,'n=28']],
+ ['kozha','Қожа','Тыс','ислам дінбасылары','Қожалар мен сунақтар',[['islam']],'Шежіре бойынша Пайғамбардың әке жақ туыстарының, арабтан келген миссионерлердің ұрпағы; дала қоғамында дін қызметін атқарған, жүзге кірмеген.','Ортақ бір ата жоқ, араб желісі J1 табылмаған; тегі рухани сабақтастықпен (ұстаз–шәкірт) берілген болуы мүмкін.',['аралас',0,'біртекті желі жоқ']],
+ ['tolengit','Төлеңгіт','Тыс','хан-сұлтандардың қызметшілері','Әртүрлі тайпадан шыққан адамдар',[['dinlin','teles','toguz','mongol']],'Омарбеков: VII ғ. Құйғыр (Теле) одағындағы 10 мың әскері бар доланго (тулангит) ұлысы; кейін ежелгі Жалайырдың он руының бірі, төрелерден тарақ таңбасын алған. Кейінгі қазақ төлеңгіттері – сұлтандарға қызмет еткен әртүрлі рудан шыққан кірмелер (Ф. Зобнин).','Жүйелі генетикалық зерттеу табылмады.',['дерек жоқ',0,'']]
+];
+const hap={'C2*-ST':'#0d9cc4','C2*':'#0d9cc4','C2':'#5bb8d6','C2-M48':'#2f6fbf','C2-M407':'#14508c','J1-M267':'#b07a2a','N1a-M178':'#8a5cc2','N1a':'#8a5cc2','Q-M242':'#e07b39','G2-P15':'#c8a01e','G1-M285':'#f2b51c','O2-M134':'#2e9e6b','R1b':'#cf3b26'};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+const chip=(id,a,b)=>`<button class="n" type="button" data-id="${id}">${esc(a)}<small>${esc(b)}</small></button>`;
+for(const t of['A','B','C'])document.getElementById('t'+t).innerHTML=Object.entries(N).filter(([,v])=>v[0]===t).map(([k,v])=>chip(k,v[1],v[2])).join('');
+const zn=z=>z==='Тыс'?'Жүзден тыс':z+' жүз';
+document.getElementById('tD').innerHTML=['Ұлы','Орта','Кіші','Тыс'].map(z=>`<div class="zh${z==='Тыс'?' out':''}"><h3>${zn(z)}</h3><div class="nodes">${T.filter(t=>t[2]===z).map(t=>chip(t[0],t[1],z==='Тыс'?t[3]:'ұраны: '+t[3])).join('')}</div></div>`).join('');
+const TT=Object.fromEntries(T.map(t=>[t[0],t]));
+const edges=[];T.forEach(t=>t[5].forEach(ch=>{const c=[...ch,t[0]];for(let i=1;i<c.length;i++)edges.push([c[i-1],c[i],t[0]])}));
+const uniq=[...new Map(edges.map(e=>[e[0]+'>'+e[1],e])).values()];
+const tree=document.getElementById('tree'),svg=document.getElementById('edges');
+let sel='dulat';
+const lit=()=>{if(TT[sel])return new Set(edges.filter(e=>e[2]===sel).map(e=>e[0]+'>'+e[1]));const tr=new Set(T.filter(t=>t[5].some(c=>c.includes(sel))).map(t=>t[0]));return new Set(edges.filter(e=>tr.has(e[2])).map(e=>e[0]+'>'+e[1]))};
+const draw=()=>{const b=tree.getBoundingClientRect(),P={};tree.querySelectorAll('.n').forEach(n=>{const r=n.getBoundingClientRect();P[n.dataset.id]={x:r.left-b.left+r.width/2,l:r.left-b.left,r:r.right-b.left,t:r.top-b.top,b:r.bottom-b.top}});const L=lit();
+ svg.innerHTML=uniq.map(([a,c])=>{const p=P[a],q=P[c];if(!p||!q)return'';const k=a+'>'+c,cl=`e${L.has(k)?' on':''}`;if(q.t<p.b-4){const y1=(p.t+p.b)/2,y2=(q.t+q.b)/2,fw=q.l>=p.r-2,x1=fw?p.r:p.l,x2=fw?q.l:q.r,d=fw?18:-18;return`<path class="${cl}" d="M${x1},${y1}C${x1+d},${y1} ${x2-d},${y2} ${x2},${y2}"/>`}const y1=p.b,y2=q.t,m=(y1+y2)/2;return`<path class="${cl}" d="M${p.x},${y1}C${p.x},${m} ${q.x},${m} ${q.x},${y2}"/>`}).sort((x,y)=>x.includes(' on')-y.includes(' on')).join('')};
+const ro=new ResizeObserver(draw);ro.observe(tree);
+const card=document.getElementById('card');
+const bar=(h,v)=>`<div class="bar"><i style="width:${v}%;background:${hap[h]||'#888'}"></i></div>`;
+const show=()=>{const L=lit(),on=new Set([...L].flatMap(k=>k.split('>')));
+ tree.classList.add('dim');tree.querySelectorAll('.n').forEach(n=>{n.classList.toggle('sel',n.dataset.id===sel);n.classList.toggle('on',on.has(n.dataset.id))});draw();
+ let h,tl;
+ if(TT[sel]){const t=TT[sel],[hg,v,x]=t[8];const ids=[...new Set(t[5].flat())];
+  h=`<h2>${esc(t[1])}</h2><div class="meta">${esc(zn(t[2]))} · ${t[2]==='Тыс'?esc(t[3]):'ұраны: '+esc(t[3])}</div>${t[4]?`<p><b>Негізгі рулары:</b> ${esc(t[4])}</p>`:''}
+  <h4>Шығу тегі тізбегі (Омарбеков бойынша)</h4><ol class="chain">${ids.map(i=>`<li>${esc(N[i][1])} <span>${esc(N[i][2])}</span></li>`).join('')}<li><b>${esc(t[1])}</b> <span>${t[2]==='Тыс'?'жүзден тыс топ':'қазақ тайпасы'}</span></li></ol>
+  <h4>Кітапта не делінген</h4><p>${esc(t[6])}</p>
+  <h4>Генетика (Y-ДНҚ, әке желісі)</h4>${v?`<div class="gene"><span>${esc(hg)}</span><b>${String(v).replace('.',',')}%</b>${bar(hg,v)}</div>`:''}${x?`<span class="tag">${esc(x)}</span>`:''}<p class="note">${esc(t[7])}</p>`;
+  tl=`${t[1]}: ${ids.slice(0,3).map(i=>N[i][1]).join(' → ')}${ids.length>3?' …':''}`}
+ else{const v=N[sel],tr=T.filter(t=>t[5].some(c=>c.includes(sel)));
+  h=`<h2>${esc(v[1])}</h2><div class="meta">${esc(v[2])}</div><p>${esc(v[3])}</p><h4>Осы бірлестікпен байланысты тайпалар</h4><p>${tr.length?tr.map(t=>`<span class="tag">${esc(t[1])}</span>`).join(''):'Тікелей тармақ көрсетілмеген.'}</p>`;
+  tl=`${v[1]}: ${tr.length} тайпа`}
+ card.innerHTML=h;document.getElementById('tt').textContent=tl};
+const toast=document.getElementById('toast');let cardIn=false;const io=new IntersectionObserver(es=>{cardIn=es[0].isIntersecting;if(cardIn)toast.classList.remove('show')});io.observe(card);
+tree.addEventListener('click',e=>{const n=e.target.closest('.n');if(!n)return;sel=n.dataset.id;show();if(!cardIn)toast.classList.add('show')});
+document.getElementById('tb').addEventListener('click',()=>{toast.classList.remove('show');card.scrollIntoView({behavior:'smooth'})});
+const dz={'Ұлы':'Ұлы','Орта':'Орта','Кіші':'Кіші'};
+document.querySelector('#dna tbody').innerHTML=T.map(t=>{const[hg,v,x]=t[8];return`<tr><td><b>${esc(t[1])}</b></td><td>${t[2]==='Тыс'?'жүзден тыс':dz[t[2]]}</td><td>${esc(hg)}${v?bar(hg,v):''}</td><td class="num">${v?String(v).replace('.',',')+'%':'–'}</td><td>${esc(t[7])}${x?' ('+esc(x)+')':''}</td></tr>`}).join('');
+const D=[
+ ['Ұлы жүз тайпалары ежелгі үйсіндердің ұрпағы ма?','Омарбеков: иә. Шежіредегі Елсау би – үйсін күнбиі; Дулат, Албан, Суан, Сарыүйсін т.б. ежелгі үйсіннің мұрагерлері.','Генетика: алты үйсін руының ортақ атасы шамамен 700–800 жыл бұрын өмір сүрген; C2*-ST желісі ерте нирун моңғолдарына жақын. Үш руда (Ысты, Сіргелі, Ошақты) профиль бөлек.','Атау ежелгі болуы, ал ру атасы ортағасырлық болуы қатар шындық болуы мүмкін.'],
+ ['Керей Сарыүйсіннен тарады ма?','Омарбеков: Абақ таңбасы мен крест белгісі Керей мен Сарыүйсіннің жақындығын, тіпті Керейдің Сарыүйсіннен бөлінгенін көрсетеді.','Генетика (2024): Керей мен Үйсін арасында туыстық бар, бірақ Абақ атасының Үйсіннен шығуы расталмайды; Шыңғысханның өгей әкесінен тарау аңызы да расталмады.','Таңба саяси одақты да білдіруі мүмкін.'],
+ ['Әлімұлы мен Байұлы бір атадан ба?','Шежіре: Алау әмір ұрпақтары. Омарбеков: «Алшын» атауы Ашина әулетімен байланысты.','Генетика (2021): Батыс қазақтардың үштен екісі C2-M48 желісінде; Әлімұлы мен Байұлының ортақ атасы 500–700 жыл бұрын өмір сүрген. Жетіру бұған кірмейді.','Мұнда шежіре мен генетика сәйкес келеді.'],
+ ['Қожалар араб миссионерлерінің ұрпағы ма?','Шежіре: Пайғамбар туыстарының, Мәуереннахрдан келген дін таратушылардың ұрпағы.','Генетика (2017): қожалар мен сунақтарда ортақ басым ата жоқ, араб экспансиясының белгісі J1 желісі табылмады; тегі ұстаздан шәкіртке берілген рухани шежіре болуы ықтимал.','Алтын Орда исламды қабылдаған кезде рухани шежіре биологиялық шежіреге айналуы мүмкін.'],
+ ['Жетіру – бір атаның ұрпағы ма, әлде одақ па?','Омарбеков: жеті тайпа Тәуке хан тұсында бір бірлестікке бірікті; «жеті» үлгісі қимақ пен қыпшақтардан таныс.','Генетика (2025): жеті ру бір кластер құрамайды, әрқайсысы дербес; басқа қазақ тайпаларымен байланысы бар.','Саяси одақ нұсқасы расталды.']
+];
+document.getElementById('deb').innerHTML=D.map(d=>`<div class="deb"><h3>${esc(d[0])}</h3><p><b>Тарихшы:</b> ${esc(d[1].replace(/^Омарбеков: |^Шежіре: /,m=>m))}</p><p><b>ДНҚ:</b> ${esc(d[2].replace(/^Генетика[^:]*: /,''))}</p><p class="note">${esc(d[3])}</p></div>`).join('');
+show();
+}
+</script>
+</body>
+</html>
